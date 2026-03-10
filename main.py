@@ -5,7 +5,7 @@ load_dotenv()
 
 
 def main():
-    print("Hello from langchain!")
+    print("Hello from langchain!!")
 
 
 if __name__ == "__main__":
