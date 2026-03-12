@@ -1,7 +1,8 @@
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
 from langchain_ollama import ChatOllama
+from langchain_openai import ChatOpenAI
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -18,15 +19,18 @@ Dr. Ing. h.c. F. Porsche AG, commonly known as Porsche,[a] is a German automobil
     2. Two fun facts about the company
     """
 
-    summary_prompt_template = PromptTemplate(input_variables=["information"], template = summary_template)
+    summary_prompt_template = PromptTemplate(
+        input_variables=["information"], template=summary_template
+    )
 
-    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-    #llm = ChatOllama(model="gemma3:270m", temperature=0)
+    # llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+    # llm = ChatOllama(model="gemma3:270m", temperature=0)
+    llm = ChatOllama(model="deepseek-r1:1.5b", temperature=0)
     # | is a pipe operator that chains the prompt template and the LLM, output from the prompt template is passed to the LLM
     chain = summary_prompt_template | llm
-    response = chain.invoke(input = {"information": information})
+    response = chain.invoke(input={"information": information})
     print(response.content)
+
 
 if __name__ == "__main__":
     main()
-
